@@ -27,7 +27,7 @@ void *receiveMessage(void *socket) {
 
     while ((length = recv(sockfd, message, MAX_LENGTH, 0)) > 0) {
         message[length] = '\0';
-        printf("%s", message);
+        printf("%s\n", message);
     }
 
     pthread_exit(NULL);
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Enter your username: ");
+    printf("Enter your username: \n");
     scanf("%s", username);
         send(sockfd, username, strlen(username), 0);
     pthread_create(&tid, NULL, receiveMessage, &sockfd);

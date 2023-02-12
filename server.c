@@ -137,11 +137,11 @@ void *handleClient(void *arg) {
                 char *roomName = strtok(NULL, " ");
                 roomIndex = addRoom(roomName);
                 addClientToRoom(clientIndex, roomIndex);
-                sprintf(message, "%s joined the room %s\n", clients[clientIndex].username, roomName);
+                sprintf(message, "\n%s joined the room %s\n", clients[clientIndex].username, roomName);
                 sendMessageToRoom(message, clientIndex, roomIndex);
             } else if (strcmp(command, "LEAVE") == 0) {
                 if (roomIndex >= 0) {
-                    sprintf(message, "%s left the room %s\n", clients[clientIndex].username, rooms[roomIndex].name);
+                    sprintf(message, "\n%s left the room %s\n", clients[clientIndex].username, rooms[roomIndex].name);
                     sendMessageToRoom(message, clientIndex, roomIndex);
                     removeClientFromRoom(clientIndex, roomIndex);
                     roomIndex = -1;
@@ -150,7 +150,7 @@ void *handleClient(void *arg) {
                     write(socket, message, strlen(message));
                 }
             } else if (strcmp(command, "EXIT") == 0) {
-                sprintf(message, "%s has left the chat\n", clients[clientIndex].username);
+                sprintf(message, "\n%s has left the chat\n", clients[clientIndex].username);
                 sendMessageToRoom(message, clientIndex, roomIndex);
                 removeClientFromRoom(clientIndex, roomIndex);
                 break;
